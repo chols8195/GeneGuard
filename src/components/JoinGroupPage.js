@@ -96,8 +96,8 @@ export const JoinGroupPage = () => {
                                     border: '1px solid var(--border-color)'
                                 }}
                             >
-                                <div style={{ fontSize: '64px', marginBottom: '24px' }}>
-                                    <img src={lockImg} alt="LOCK" />
+                                <div style={{ width: '120px', height: '120px', margin: '0 auto 24px auto' }}>
+                                    <img src={lockImg} alt="LOCK" style={{ width: '100%', height: '100%', objectFit: 'contain'}} />
                                 </div>
                                 <h2 style={{ color: 'var(--text-primary)', marginBottom: '16px' }}>
                                     Sign In Required
@@ -157,8 +157,8 @@ export const JoinGroupPage = () => {
                                     textAlign: 'center',
                                     border: '1px solid var(--border-color)'
                                 }}>
-                                    <div style={{ fontSize: '64px', marginBottom: '24px' }}>
-                                        <img src={{ groupImg }} alt="GROUP" />
+                                    <div style={{ width: '120px', height: '120px', margin: '0 auto 24px auto' }}>
+                                        <img src={{ groupImg }} alt="GROUP" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                                     </div>
                                     <h2 style={{ color: 'var(--text-primary)', marginBottom: '16px' }}>
                                         Join Group?

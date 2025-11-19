@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { AuthContext } from '../context/AuthContext';
 import { useAnalysis } from '../context/AnalysisContext';
 import { db } from '../services/database';
+import { GroupInviteQR } from '../components/GroupInviteQR';
 
 export const GroupsPage = () => {
     const { user } = useContext(AuthContext);
@@ -32,6 +33,9 @@ export const GroupsPage = () => {
         name: '',
         phone: ''
     });
+
+    // QR Code
+    const [showQRModal, setShowQRModal] = useState(false);
 
     useEffect(() => {
         if (user?.uid) {
@@ -300,6 +304,20 @@ export const GroupsPage = () => {
                                 >
                                     Edit My Profile
                                 </button>
+                                <button 
+                                    className="group-btn" 
+                                    style={{ 
+                                        background: 'var(--color-sage)',
+                                        color: 'var(--text-inverse)',
+                                        border: 'none'
+                                    }}
+                                    onClick={() => {
+                                        setSelectedGroup(group);
+                                        setShowQRModal(true);
+                                    }}
+                                >
+                                    Share QR
+                                </button>
                                 {selectedGroup && currentAnalysis && (
                                     isAnalysisShared() ? (
                                         <button 
@@ -317,6 +335,16 @@ export const GroupsPage = () => {
                                             Share My Analysis
                                         </button>                                        
                                     )
+                                )}
+                                {showQRModal && selectedGroup && (
+                                    <GroupInviteQR 
+                                        group={selectedGroup}
+                                        show={showQRModal}
+                                        onHide={() => {
+                                            setShowQRModal(false);
+                                            setSelectedGroup(null);
+                                        }}
+                                    />
                                 )}
                             </div>
                         </Col>

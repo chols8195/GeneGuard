@@ -13,6 +13,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { AnalysisProvider } from './context/AnalysisContext';
 import { ProtectedRoute } from './components/ProtectedRoute';
+import { JoinGroupPage } from './pages/JoinGroupPage';
 
 export default function App() {
   return (
@@ -46,7 +47,9 @@ export default function App() {
                     <GroupsPage />
                   </ProtectedRoute>
                 } />
-                
+                <Route path="/join-group" element={
+                  <JoinGroupPage />
+                } />
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </main>

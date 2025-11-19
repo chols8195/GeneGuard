@@ -135,6 +135,13 @@ export const AuthPage = () => {
         }
     }
 
+    const redirect = searchParams.get('redirect');
+    if (redirect) {
+        navigate(redirect);
+    } else {
+        navigate('/analysis')
+    }
+    
     const toggleMode = () => {
         setIsLogin(!isLogin);
         setError('');
@@ -150,6 +157,7 @@ export const AuthPage = () => {
         window.history.pushState({}, '', isLogin ? '/auth?mode=register' : '/auth?mode=login');
     };
 
+    // TODO: Add multifactor for the link to actually send to reset password
     const handlePasswordReset = async (e) => {
         e.preventDefault();
         setResetError('');

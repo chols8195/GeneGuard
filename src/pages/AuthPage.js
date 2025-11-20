@@ -158,7 +158,6 @@ export const AuthPage = () => {
         window.history.pushState({}, '', isLogin ? '/auth?mode=register' : '/auth?mode=login');
     };
 
-    // TODO: Add multifactor for the link to actually send to reset password
     const handlePasswordReset = async (e) => {
         e.preventDefault();
         setResetError('');
@@ -169,20 +168,25 @@ export const AuthPage = () => {
             return;
         }
 
-        const result = await resetPassword(resetEmail);
+        try {
+            const result = await resetPassword(resetEmail);
 
-        if (resetEmail.success) {
-            setResetSuccess(result.message);
-            setResetEmail('');
+            if (resetEmail.success) {
+                setResetSuccess(result.message || 'Password reset email sent! Check your inbox');
+                setResetEmail('');
 
-            // Close modal after 3 seconds (increase if needed)
-            setTimeout(() => {
-                setShowResetModal(false);
-                setResetSuccess('');
-            }, 3000);
-        } else {
-            setResetError(result.error);
+                // Close modal after 3 seconds (increase if needed)
+                setTimeout(() => {
+                    setShowResetModal(false);
+                    setResetSuccess('');
+                }, 3000);
+            } else {
+                setResetError(result.error || 'Failed to send reset email. Please try again');
+            }
+        } catch (err) {
+            setResetError('An error occurred. Please try again');
         }
+
     };
 
     return (
@@ -399,8 +403,9 @@ export const AuthPage = () => {
                                                     Cancel
                                                 </button>
                                                 <button 
-                                                    type="button"
+                                                    type="submit"
                                                     className="btn-primary-large"
+                                                    disabled={loading}
                                                 >
                                                     Send Reset Link
                                                 </button>

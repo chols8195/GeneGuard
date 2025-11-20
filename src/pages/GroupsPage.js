@@ -304,20 +304,6 @@ export const GroupsPage = () => {
                                 >
                                     Edit My Profile
                                 </button>
-                                <button 
-                                    className="group-btn" 
-                                    style={{ 
-                                        background: 'var(--color-sage)',
-                                        color: 'var(--text-inverse)',
-                                        border: 'none'
-                                    }}
-                                    onClick={() => {
-                                        setSelectedGroup(group);
-                                        setShowQRModal(true);
-                                    }}
-                                >
-                                    Share QR
-                                </button>
                                 {selectedGroup && currentAnalysis && (
                                     isAnalysisShared() ? (
                                         <button 
@@ -404,6 +390,22 @@ export const GroupsPage = () => {
                                                 >
                                                     Leave
                                                 </button>
+                                            </div>
+                                            <div key={group.id}>
+                                                <button 
+                                                    className="group-btn" 
+                                                    style={{ 
+                                                        background: 'var(--color-sage)',
+                                                        color: 'var(--text-inverse)',
+                                                        border: 'none'
+                                                    }}
+                                                    onClick={() => {
+                                                        setSelectedGroup(group);
+                                                        setShowQRModal(true);
+                                                    }}
+                                                >
+                                                    Share QR
+                                                </button>                           
                                             </div>
                                         </Card.Body>
                                     </Card>

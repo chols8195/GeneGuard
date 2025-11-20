@@ -1,10 +1,11 @@
 import { useState, useContext, useEffect } from 'react';
 import { Container, Row, Col, Alert, Modal } from 'react-bootstrap';
-import { Navigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams, Navigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 
 export const AuthPage = () => {
     const { user, loginWithEmail, registerWithEmail, loginWithGoogle, loginwithMicrosoft, resetPassword } = useContext(AuthContext);
+    const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const [isLogin, setIsLogin] = useState(true);
     const [loading, setLoading] = useState(false);
@@ -95,6 +96,13 @@ export const AuthPage = () => {
 
             if (!result.success) {
                 setError(result.error);
+            } else {
+                const redirect = searchParams.get('redirect');
+                if (redirect) {
+                    navigate(redirect);
+                } else {
+                    navigate('/analysis')
+                }
             }
         } catch (err) {
             setError('Something went wrong. Please try again.');
@@ -133,13 +141,6 @@ export const AuthPage = () => {
         } finally {
             setLoading(false);
         }
-    }
-
-    const redirect = searchParams.get('redirect');
-    if (redirect) {
-        navigate(redirect);
-    } else {
-        navigate('/analysis')
     }
     
     const toggleMode = () => {

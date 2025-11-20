@@ -1,5 +1,5 @@
 import { QRCodeSVG } from 'qrcode.react';
-import { Modal, Button } from 'react-boorstrap';
+import { Modal, Button } from 'react-bootstrap';
 import { useState } from 'react';
 
 export const GroupInviteQR = ({ group, show, onHide}) => {
@@ -21,7 +21,7 @@ export const GroupInviteQR = ({ group, show, onHide}) => {
         const ctx = canvas.getContext('2d');
         const img = new Image();
 
-        img.onLoad = () => {
+        img.onload = () => {
             canvas.width = img.width;
             canvas.height = img.height;
             ctx.drawImage(img, 0, 0);
@@ -65,7 +65,7 @@ export const GroupInviteQR = ({ group, show, onHide}) => {
                 }}>
                     <QRCodeSVG
                         id="qr-code-svg"
-                        value={inviteURL}
+                        value={inviteUrl}
                         size={256}
                         level="H"
                         includeMargin={true}

@@ -6,8 +6,6 @@ import { db } from '../services/database';
 export const ThemeToggle = () => {
     const { user } = useContext(AuthContext);
     const { theme, toggleTheme } = useTheme();
-    const [loading, setLoading] = useState(true);
-    const hasLoadedTheme = useRef(false);
 
     useEffect(() => {
         const loadThemePreference = async () => {
@@ -25,9 +23,10 @@ export const ThemeToggle = () => {
         };
 
         loadThemePreference();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user?.uid]);
 
-    const handleToggle = async () => {
+    const handleToggle = userCallback(async () => {
         const newTheme = theme === 'dark' ? 'light' : 'dark';
         toggleTheme(newTheme);
 
@@ -38,7 +37,7 @@ export const ThemeToggle = () => {
                 console.error('Failed to save theme preference:', error);
             }
         }
-    };
+    }, [theme, toggleTheme, user?.uid]);
 
     return (
         <button 

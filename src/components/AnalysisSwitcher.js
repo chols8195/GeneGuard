@@ -8,7 +8,7 @@ export const AnalysisSwitcher = () => {
     const { user } = useContext(AuthContext);
     const { currentAnalysis, setCurrentAnalysis } = useAnalysis();
     const [analysisHistory, setAnalysisHistory] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     const loadAnalysisHistory = useCallback(async () => {
         if (!user?.uid) return null;

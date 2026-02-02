@@ -43,6 +43,7 @@ export const GroupsPage = () => {
             loadUserProfile();
         }
         setLoading(false);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user?.uid]);
 
     useEffect(() => {
@@ -50,6 +51,7 @@ export const GroupsPage = () => {
             loadGroupMembers(selectedGroup.id);
             loadSharedAnalyses(selectedGroup.id);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedGroup?.id, user?.uid]);
 
     const loadUserProfile = async () => {

@@ -54,7 +54,7 @@ export const NavBar = () => {
 
     return (
         <Navbar expand="lg" className="fixed-top">
-            <Container>
+            <Container fluid>
                 <Navbar.Toggle className="d-lg-none" onClick={() => setShowMenu(true)}>
                     <span className="navbar-toggler-icon"></span>
                 </Navbar.Toggle>

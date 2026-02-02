@@ -1702,7 +1702,8 @@ nav.navbar .navbar-nav a.nav-link.navbar-link.active {
 }
 
 @media (min-width:1700px) {
-  main .container {
+  main .container,
+  nav.navbar .container {
     max-width: 100%;
     padding: 0 150px;
   }

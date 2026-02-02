@@ -35,15 +35,12 @@ DISCLAIMER_TXT = (
 app = FastAPI(title="GeneGuard API", version="0.2.0")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "https://geneguard.vercel.app", 
-        "https://*.vercel.app",
-        "http://localhost:3000"
-    ],
+    allow_origins=DEV_ORIGINS,               # exact origins
+    allow_origin_regex=r"https://.*\.vercel\.app",  # preview branches
     allow_methods=["*"],
     allow_headers=["*"],
     allow_credentials=True,
-    expose_headers=["*"]
+    expose_headers=["Content-Disposition"],
 )
 
 app.include_router(database_router)

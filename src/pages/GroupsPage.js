@@ -37,23 +37,6 @@ export const GroupsPage = () => {
     // QR Code
     const [showQRModal, setShowQRModal] = useState(false);
 
-    useEffect(() => {
-        if (user?.uid) {
-            loadGroups();
-            loadUserProfile();
-        }
-        setLoading(false);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [user?.uid, loadGroups, loadUserProfile]);
-
-    useEffect(() => {
-        if (selectedGroup?.id && user?.uid) {
-            loadGroupMembers(selectedGroup.id);
-            loadSharedAnalyses(selectedGroup.id);
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [selectedGroup?.id, user?.uid, loadGroupMembers, loadSharedAnalyses]);
-
     const loadUserProfile = useCallback(async () => {
         if (!user?.uid) return;
 
@@ -136,7 +119,24 @@ export const GroupsPage = () => {
         } catch (error) {
             console.error('Failed to load shared analyses:', error);
         }
-    }, [groupMembers]);
+    }, [user?.uid, groupMembers]);
+
+    useEffect(() => {
+        if (user?.uid) {
+            loadGroups();
+            loadUserProfile();
+        }
+        setLoading(false);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user?.uid, loadGroups, loadUserProfile]);
+
+    useEffect(() => {
+        if (selectedGroup?.id && user?.uid) {
+            loadGroupMembers(selectedGroup.id);
+            loadSharedAnalyses(selectedGroup.id);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [selectedGroup?.id, user?.uid, loadGroupMembers, loadSharedAnalyses]);
 
     const createGroup = async (e) => {
         e.preventDefault();

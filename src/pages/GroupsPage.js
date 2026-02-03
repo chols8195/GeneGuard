@@ -91,7 +91,7 @@ export const GroupsPage = () => {
         }
     };
 
-    const loadGroups = userCallback(async () => {
+    const loadGroups = useCallback(async () => {
         if (!user?.uid) return;
 
         try {
@@ -118,7 +118,7 @@ export const GroupsPage = () => {
         }
     }, [user?.uid]);
 
-    const loadSharedAnalyses = userCallback(async (groupId) => {
+    const loadSharedAnalyses = useCallback(async (groupId) => {
         if (!user?.uid) return;
 
         try {
